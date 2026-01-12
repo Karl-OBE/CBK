@@ -1,23 +1,23 @@
 from fastapi import FastAPI
 import random
 
-app = FastAPI()
+app = FastAPI(title="O.M.L.I. Phase 1 - Tennis Prediction Engine")
 
 @app.get("/")
-def root():
-    return {"message": "O.M.L.I. Tennis Engine is live!"}
+def read_root():
+    return {"status": "O.M.L.I. Tennis Engine is live!"}
 
     @app.get("/predict")
-    def predict(player_a: str = "Player A", player_b: str = "Player B"):
+    def predict_outcome(player_a: str, player_b: str):
         """
-            Simulates a basic tennis prediction output.
-                This will later connect to real tennis data APIs.
+            Simple mock prediction for now – generates a random win probability.
+                This will later be replaced with real data and models.
                     """
-                        confidence = round(random.uniform(0.85, 0.99), 2)
-                            winner = player_a if confidence > 0.9 else player_b
+                        confidence = round(random.uniform(0.85, 0.99), 3)
+                            winner = player_a if confidence > 0.92 else player_b
                                 return {
-                                        "match": f"{player_a} vs {player_b}",
-                                                "predicted_winner": winner,
-                                                        "confidence": f"{confidence * 100:.1f}%",
-                                                                "engine_status": "Stable"
+                                        "predicted_winner": winner,
+                                                "confidence": f"{confidence * 100:.1f}%",
+                                                        "player_a": player_a,
+                                                                "player_b": player_b
                                                                     }
